@@ -1,0 +1,857 @@
+/* ============================================================
+   AYUSH SINGH — AI/LLM SPECIALIST PORTFOLIO THEME
+   Dark neural-net aesthetic with circuit board details,
+   glowing accents, and robotic motion design.
+   Drop this file into your /css/ folder as style.css
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700;900&family=Orbitron:wght@400;700;900&display=swap');
+
+/* ── CSS Variables ─────────────────────────────────────────── */
+:root {
+  --bg-deep:      #020408;
+  --bg-panel:     #060d14;
+  --bg-card:      #0a1628;
+  --bg-card2:     #0d1f35;
+  --accent:       #00d4ff;
+  --accent2:      #ff6b35;
+  --accent3:      #00ff9d;
+  --glow:         0 0 12px rgba(0,212,255,0.6), 0 0 30px rgba(0,212,255,0.2);
+  --glow2:        0 0 12px rgba(0,255,157,0.5);
+  --text-main:    #e8f4f8;
+  --text-muted:   #6a8fa8;
+  --text-dim:     #304558;
+  --border:       rgba(0,212,255,0.15);
+  --border-glow:  rgba(0,212,255,0.4);
+  --font-display: 'Orbitron', monospace;
+  --font-body:    'Exo 2', sans-serif;
+  --font-mono:    'Share Tech Mono', monospace;
+  --grid-size:    40px;
+}
+
+/* ── Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* Animated circuit-board background grid on body */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Moving scan line */
+body::after {
+  content: '';
+  position: fixed;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: scanline 8s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.3;
+}
+@keyframes scanline {
+  0%   { top: -2px; }
+  100% { top: 100vh; }
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+/* ── Typography ────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+a:hover {
+  color: var(--accent3);
+  text-shadow: var(--glow2);
+  text-decoration: none;
+}
+
+p { color: var(--text-muted); margin-bottom: 1rem; }
+
+/* ── Navbar ────────────────────────────────────────────────── */
+.ftco_navbar {
+  background: rgba(2, 4, 8, 0.95) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0;
+  box-shadow: 0 2px 30px rgba(0,212,255,0.08);
+  transition: all 0.3s;
+}
+
+.navbar-brand {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent) !important;
+  letter-spacing: 2px;
+  text-shadow: var(--glow);
+  text-transform: uppercase;
+}
+
+.ftco-navbar-light .navbar-nav .nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted) !important;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 0.5rem 1.2rem;
+  position: relative;
+  transition: color 0.3s;
+}
+.ftco-navbar-light .navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; right: 50%;
+  height: 1px;
+  background: var(--accent);
+  transition: left 0.3s, right 0.3s;
+  box-shadow: var(--glow);
+}
+.ftco-navbar-light .navbar-nav .nav-link:hover { color: var(--accent) !important; }
+.ftco-navbar-light .navbar-nav .nav-link:hover::after { left: 1.2rem; right: 1.2rem; }
+
+/* ── Hero Section ──────────────────────────────────────────── */
+.hero {
+  background: var(--bg-deep) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated neural nodes in hero */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(0,212,255,0.07) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0,255,157,0.05) 0%, transparent 40%),
+    radial-gradient(circle at 60% 80%, rgba(255,107,53,0.04) 0%, transparent 35%);
+  animation: neuralpulse 6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes neuralpulse {
+  0%   { opacity: 0.6; transform: scale(1); }
+  100% { opacity: 1;   transform: scale(1.05); }
+}
+
+.home-slider .slider-item {
+  background: var(--bg-deep) !important;
+  min-height: 100vh;
+}
+
+.home-slider .overlay {
+  background: linear-gradient(135deg,
+    rgba(2,4,8,0.97) 0%,
+    rgba(6,13,20,0.85) 60%,
+    rgba(2,4,8,0.6) 100%) !important;
+}
+
+.slider-item .one-third {
+  background-color: var(--bg-panel) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Robot/AI illustration panel glow */
+.slider-item .one-third::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,255,157,0.04));
+  z-index: 1;
+}
+.slider-item .one-third::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 10%; bottom: 10%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  box-shadow: var(--glow);
+}
+
+/* Hero text */
+.slider-item .text .subheading {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  color: var(--accent3);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+  animation: glitch-in 0.8s ease forwards;
+}
+
+.slider-item .text h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: 1.1;
+  text-shadow: 0 0 40px rgba(0,212,255,0.4);
+}
+
+.slider-item .text h1 span {
+  color: var(--accent);
+  text-shadow: var(--glow);
+  position: relative;
+}
+
+.slider-item .text h2 {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  color: var(--accent3);
+  letter-spacing: 2px;
+  font-weight: 400;
+  margin-top: 0.5rem;
+}
+
+#typing-animation {
+  font-family: var(--font-display) !important;
+  font-size: clamp(1rem, 3vw, 1.6rem) !important;
+  font-weight: 700 !important;
+  color: var(--accent) !important;
+  text-shadow: var(--glow);
+  letter-spacing: 2px;
+  display: block;
+}
+
+/* Glitch animation for subheading */
+@keyframes glitch-in {
+  0%   { opacity: 0; transform: translateX(-10px); letter-spacing: 8px; }
+  60%  { opacity: 1; transform: translateX(2px); letter-spacing: 3px; }
+  100% { opacity: 1; transform: translateX(0);   letter-spacing: 4px; }
+}
+
+/* ── Buttons ───────────────────────────────────────────────── */
+.btn-primary {
+  background: transparent !important;
+  border: 1px solid var(--accent) !important;
+  color: var(--accent) !important;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.75rem 1.8rem !important;
+  border-radius: 0 !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateX(-105%);
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+.btn-primary:hover {
+  color: var(--bg-deep) !important;
+  text-shadow: none !important;
+  box-shadow: var(--glow) !important;
+}
+.btn-primary:hover::before { transform: translateX(0); }
+
+.btn-white, .btn-outline-white {
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  color: var(--text-muted) !important;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.75rem 1.8rem !important;
+  border-radius: 0 !important;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  transition: all 0.3s;
+}
+.btn-white:hover, .btn-outline-white:hover {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+/* ── Section Shared Styles ─────────────────────────────────── */
+.ftco-section {
+  background: var(--bg-deep);
+  padding: 6rem 0;
+  position: relative;
+  z-index: 2;
+}
+.ftco-no-pt { padding-top: 0 !important; }
+.ftco-no-pb { padding-bottom: 0 !important; }
+
+/* Section headings */
+.heading-section h1.big, .heading-section h1.big-2 {
+  font-family: var(--font-display);
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 900;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0,212,255,0.06);
+  letter-spacing: 8px;
+  white-space: nowrap;
+  pointer-events: none;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.heading-section { position: relative; }
+
+.heading-section h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--text-main);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  position: relative;
+  display: inline-block;
+}
+.heading-section h2::after {
+  content: '';
+  display: block;
+  width: 40px; height: 2px;
+  background: var(--accent);
+  box-shadow: var(--glow);
+  margin: 0.5rem auto 0;
+}
+
+.heading-section p { color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+/* ── About Section ─────────────────────────────────────────── */
+.ftco-about { background: var(--bg-panel) !important; }
+
+.img-about {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+.img-about::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.04), transparent);
+  pointer-events: none;
+}
+
+.about-img img {
+  border: 1px solid var(--border-glow);
+  filter: grayscale(20%) brightness(0.9);
+  transition: filter 0.4s;
+}
+.about-img img:hover {
+  filter: grayscale(0%) brightness(1.05);
+  box-shadow: var(--glow);
+}
+
+.about-info .title-s {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+/* Skills progress bars */
+.skill-mf .progress {
+  background: rgba(0,212,255,0.08) !important;
+  border-radius: 0 !important;
+  height: 4px !important;
+  margin: 4px 0 12px !important;
+  position: relative;
+  overflow: visible !important;
+}
+.skill-mf .progress::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    90deg, transparent, transparent 4px,
+    rgba(0,212,255,0.05) 4px, rgba(0,212,255,0.05) 5px
+  );
+}
+.skill-mf .progress .progress-bar {
+  background: linear-gradient(90deg, var(--accent), var(--accent3)) !important;
+  height: 4px !important;
+  box-shadow: 0 0 8px rgba(0,212,255,0.8);
+  border-radius: 0 !important;
+  animation: load-bar 1.2s ease forwards;
+  position: relative;
+}
+.skill-mf .progress .progress-bar::after {
+  content: '';
+  position: absolute;
+  right: -1px; top: -2px;
+  width: 3px; height: 8px;
+  background: #fff;
+  box-shadow: 0 0 6px var(--accent);
+}
+@keyframes load-bar { from { width: 0 !important; } }
+
+.skill-mf span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.skill-mf span.pull-right { color: var(--accent); }
+
+/* About text */
+.ftco-about .col-md-6.col-lg-7 h1.big {
+  font-family: var(--font-display);
+  font-size: 6rem;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0,212,255,0.05);
+}
+
+.about-info li {
+  border-bottom: 1px solid var(--border);
+  padding: 6px 0;
+  font-size: 0.85rem;
+}
+.about-info li span:first-child {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  color: var(--accent);
+  text-transform: uppercase;
+  min-width: 130px;
+}
+.about-info li span:last-child { color: var(--text-muted); }
+
+/* ── Counter Section ───────────────────────────────────────── */
+.ftco-counter {
+  background: var(--bg-panel) !important;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.block-18 .text strong.number {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--accent);
+  text-shadow: var(--glow);
+  display: block;
+  line-height: 1;
+}
+.block-18 .text span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ── Resume Section ────────────────────────────────────────── */
+#resume-section { background: var(--bg-panel) !important; }
+
+h1.big-4 {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: var(--glow);
+  position: relative;
+  padding-left: 14px;
+}
+h1.big-4::before {
+  content: '//';
+  font-family: var(--font-mono);
+  color: var(--accent3);
+  margin-right: 8px;
+  font-size: 0.9em;
+  opacity: 0.7;
+}
+
+.underline {
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  box-shadow: var(--glow);
+  margin: 8px 0 20px;
+}
+
+.resume-wrap {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-left: 2px solid var(--accent) !important;
+  padding: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.resume-wrap:hover {
+  border-color: var(--accent3) !important;
+  border-left-color: var(--accent3) !important;
+  box-shadow: var(--glow2);
+}
+.resume-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, transparent 50%, rgba(0,212,255,0.06) 50%);
+  pointer-events: none;
+}
+
+.resume-wrap .date {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--accent3);
+  text-transform: uppercase;
+  display: inline-block;
+  border: 1px solid rgba(0,255,157,0.3);
+  padding: 2px 8px;
+  margin-bottom: 0.5rem;
+}
+
+.resume-wrap h2 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-main);
+  margin: 0.3rem 0 0.2rem;
+}
+
+.resume-wrap .position {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.resume-wrap p, .resume-wrap ul { color: var(--text-muted); font-size: 0.85rem; }
+.resume-wrap li { padding: 2px 0; }
+.resume-wrap li::marker { color: var(--accent); }
+
+/* ── Projects Section ──────────────────────────────────────── */
+#project-section { background: var(--bg-deep) !important; }
+
+.blog-entry {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+}
+.blog-entry:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 40px rgba(0,212,255,0.15);
+  border-color: var(--border-glow) !important;
+}
+.blog-entry::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 14px; height: 14px;
+  background: linear-gradient(135deg, transparent 50%, var(--accent) 50%);
+}
+
+.block-20 {
+  min-height: 200px;
+  background-size: cover !important;
+  background-position: center !important;
+  position: relative;
+  filter: grayscale(60%) brightness(0.6);
+  transition: filter 0.4s;
+}
+.blog-entry:hover .block-20 {
+  filter: grayscale(20%) brightness(0.8);
+}
+.block-20::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(2,4,8,0.95));
+}
+
+.blog-entry .text {
+  padding: 1.2rem !important;
+}
+.blog-entry .text .heading a {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+  transition: color 0.2s;
+}
+.blog-entry .text .heading a:hover { color: var(--accent); }
+.blog-entry .text p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+/* Research card special style */
+.blog-entry[style*="dashed"] {
+  border-style: dashed !important;
+  border-color: rgba(0,255,157,0.3) !important;
+  background: linear-gradient(135deg, var(--bg-card), rgba(0,255,157,0.02)) !important;
+  clip-path: none !important;
+}
+.blog-entry[style*="dashed"]::after { display: none; }
+
+/* ── Contact Section ───────────────────────────────────────── */
+.contact-section { background: var(--bg-panel) !important; }
+
+.contact-section .box {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.contact-section .box::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,212,255,0.04), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.contact-section .box:hover {
+  border-color: var(--border-glow) !important;
+  box-shadow: var(--glow);
+}
+.contact-section .box:hover::before { opacity: 1; }
+
+.contact-section .icon {
+  width: 50px; height: 50px;
+  border: 1px solid var(--border-glow);
+  border-radius: 0 !important;
+  background: transparent !important;
+  margin: 0 auto 1rem;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 100%, 0 100%, 0 20%);
+}
+.contact-section .icon span {
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.contact-section h3 {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Social Icons ──────────────────────────────────────────── */
+.ftco-footer-social li a {
+  width: 38px; height: 38px;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted) !important;
+  transition: all 0.3s;
+  clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%);
+}
+.ftco-footer-social li a:hover {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: var(--bg-deep) !important;
+  box-shadow: var(--glow);
+  transform: rotate(5deg) scale(1.1);
+}
+.ftco-footer-social .normal-txt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-right: 0.5rem;
+}
+
+/* ── GitHub Banner Section ─────────────────────────────────── */
+.ftco-hireme {
+  background: var(--bg-card) !important;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 4rem 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+.ftco-hireme::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 30% 50%, rgba(0,212,255,0.05), transparent 50%),
+    radial-gradient(circle at 70% 50%, rgba(0,255,157,0.04), transparent 50%);
+  animation: neuralpulse 5s ease-in-out infinite alternate;
+}
+.ftco-hireme h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 900;
+  color: var(--text-main);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.ftco-hireme h2 span { color: var(--accent); text-shadow: var(--glow); }
+.ftco-hireme .heading h4 {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* ── Footer ────────────────────────────────────────────────── */
+.ftco-footer {
+  background: var(--bg-panel) !important;
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 0;
+}
+.ftco-footer p {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin: 0;
+}
+.ftco-footer a { color: var(--accent); }
+
+/* ── Box Shadow / Card Utility ─────────────────────────────── */
+.box-shadow-full {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+
+/* ── Loader ────────────────────────────────────────────────── */
+#ftco-loader {
+  background: var(--bg-deep) !important;
+}
+#ftco-loader .path { stroke: var(--accent) !important; }
+#ftco-loader .path-bg { stroke: var(--border) !important; }
+
+/* ── AOS animations override ───────────────────────────────── */
+[data-aos] { transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important; }
+
+/* ── Floating robot SVG decoration (pure CSS, injected via ::before) ── */
+/* Circuit node dots scattered */
+.ftco-section:nth-child(odd)::after {
+  content: '';
+  position: absolute;
+  top: 20px; right: 30px;
+  width: 80px; height: 80px;
+  background-image:
+    radial-gradient(circle, rgba(0,212,255,0.3) 1px, transparent 1px),
+    radial-gradient(circle, rgba(0,212,255,0.15) 1px, transparent 1px);
+  background-size: 14px 14px, 7px 7px;
+  background-position: 0 0, 7px 7px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .ftco_navbar { background: var(--bg-deep) !important; }
+  .slider-item .text h1 { font-size: 2rem; }
+  .heading-section h1.big, .heading-section h1.big-2 { font-size: 5rem; }
+}
+@media (max-width: 767px) {
+  .heading-section h1.big, .heading-section h1.big-2 { display: none; }
+  .resume-wrap { clip-path: none; }
+  .blog-entry { clip-path: none; }
+  .contact-section .box { clip-path: none; }
+}
+
+/* ── Extra: Glowing tag badges ─────────────────────────────── */
+.skill-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: var(--accent);
+  border: 1px solid rgba(0,212,255,0.3);
+  padding: 2px 8px;
+  margin: 2px;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.skill-badge:hover {
+  background: var(--accent);
+  color: var(--bg-deep);
+  box-shadow: var(--glow);
+}
+
+/* ── Cursor glow effect ────────────────────────────────────── */
+@media (pointer: fine) {
+  body { cursor: none; }
+  body::after {
+    content: '';
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: var(--glow);
+    transition: transform 0.1s;
+  }
+}
+
+/* ── Robot SVG embedded as background on hero right panel ─── */
+.slider-item .one-third {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400' opacity='0.12'%3E%3Cg fill='none' stroke='%2300d4ff' stroke-width='1'%3E%3C!-- Head --%3E%3Crect x='100' y='40' width='100' height='80' rx='4'/%3E%3Crect x='120' y='55' width='20' height='14' rx='2'/%3E%3Crect x='160' y='55' width='20' height='14' rx='2'/%3E%3Cline x1='130' y1='62' x2='130' y2='62' stroke-width='4' stroke-linecap='round'/%3E%3Cline x1='170' y1='62' x2='170' y2='62' stroke-width='4' stroke-linecap='round'/%3E%3Crect x='125' y='95' width='50' height='6' rx='2'/%3E%3Cline x1='150' y1='120' x2='150' y2='140'/%3E%3C!-- Antenna --%3E%3Cline x1='150' y1='40' x2='150' y2='20'/%3E%3Ccircle cx='150' cy='16' r='4'/%3E%3C!-- Body --%3E%3Crect x='80' y='140' width='140' height='120' rx='4'/%3E%3Crect x='95' y='155' width='110' height='70' rx='2' opacity='0.5'/%3E%3Cline x1='95' y1='190' x2='205' y2='190' opacity='0.4'/%3E%3Ccircle cx='130' cy='173' r='8'/%3E%3Ccircle cx='170' cy='173' r='8'/%3E%3Ccircle cx='150' cy='205' r='12'/%3E%3C!-- Arms --%3E%3Crect x='40' y='145' width='35' height='90' rx='4'/%3E%3Crect x='225' y='145' width='35' height='90' rx='4'/%3E%3Crect x='30' y='230' width='45' height='20' rx='3'/%3E%3Crect x='225' y='230' width='45' height='20' rx='3'/%3E%3C!-- Legs --%3E%3Crect x='95' y='265' width='45' height='90' rx='4'/%3E%3Crect x='160' y='265' width='45' height='90' rx='4'/%3E%3Crect x='88' y='350' width='58' height='18' rx='3'/%3E%3Crect x='154' y='350' width='58' height='18' rx='3'/%3E%3C!-- Circuit lines --%3E%3Cline x1='20' y1='80' x2='80' y2='80' stroke-dasharray='4,4'/%3E%3Cline x1='220' y1='80' x2='280' y2='80' stroke-dasharray='4,4'/%3E%3Ccircle cx='20' cy='80' r='3'/%3E%3Ccircle cx='280' cy='80' r='3'/%3E%3Cline x1='20' y1='80' x2='20' y2='180' stroke-dasharray='4,4'/%3E%3Cline x1='280' y1='80' x2='280' y2='180' stroke-dasharray='4,4'/%3E%3C/g%3E%3C/svg%3E"),
+    url(images/bg_1.png) !important;
+  background-size: 70%, cover !important;
+  background-position: center 60%, center !important;
+  background-repeat: no-repeat, no-repeat !important;
+}
